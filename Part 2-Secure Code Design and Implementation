@@ -1,0 +1,695 @@
+Security + Notes
+Part 2: Secure Code Design and Implementation
+SY0 - 601
+
+1. Software Development Lifecycle
+
+    Software Platforms
+        Software security depends upon secure application platforms
+        Endpoint Applications
+            - self-contained on a device
+            - Software runs entirely on a device (laptop 
+        Client/Server Apps
+            - interact with a server
+            - database-driven applications run in a client/server environment.
+        
+        Web applications
+            - Client/Server over the web
+            - end user runs a web browser as their endpoint
+            - mobile endpoints commonly run both endpoint and client/server applications.
+        Embedded devices power the internet of Things
+        
+    Development Methodologies
+        Software development processes must incorporate security at every stage.
+        To insure the end result is safe and secure code and meets the company's business requirements.
+        
+        Begin with business requirements and translate them into a design.
+        Technical experts lay out the roadmap and determine the interfaces between the compontents
+        
+        Quality Software requires a quality design.
+        Construction workers analogy.
+        Select a software development methodology.
+            
+            Waterfall Model
+     
+     System Requirements  -------------------------------------------------------->
+           
+               Software Requirements
+                           
+                        Preliminary Design
+                                   
+       ^                          Detailed Design                                |
+       |                                                                         |
+       |                                 Code and Debug                          |
+                                                   
+                                                 Testing
+                                                               
+       <-------------------------------------------  Operations and Maintenance
+       
+   Maturity Models
+       Provide standard benchmarks
+       
+       Capability Maturity Model Integration (CMMI)
+           - assesses an organization's process maturity.
+           
+           Level 1: Initial -worl gets done but delayed and budget overruns
+           Level 2: Managed - some basic processes. configuration management, measurement and analysis. project monitoring and control
+                    project planning, process and product QA, requirements management, process and agreement management.
+           Level 3: Defined - formal documented processes; decision analysis and resolution, integrated project management, organizational
+                    process definition, organizational training, organizational process focus. product integration, requirements development
+                    risk management, technical solution, validation, verification
+           Level 4: Quantitatively Managed: - quantitative measures to verify progress.
+           Level 5: Optimizing - continuous process improvement to always get better. Causal analysis and resolution. Organizational 
+                    Performance Management
+           
+           IDEAL 
+           Initiating, Diagnosing, Establishing, Action, Learning
+    
+        Change Management
+           - Standardizes code release processes.
+           - software developement is never finished
+          
+          Request Control - manages, evaluates, and prioritizes inbound requests from customers.
+          Change Control - grants permission for developers to make changes to the application code.
+          Release Control - release control moves the code from the development environment into production.
+          
+        Code Environments
+          - Developer Environment --> Test Environment --> Staging Environment --> Production Environment
+          
+   Automation and Development Operations
+       Merging Two Worlds
+           Seeks to bring together IT and Developers.
+           
+           DevOps Goals
+           - Build collaborative relationships
+           - embrace automation
+           - facilitate rapid release of code
+           - provide a stable environment
+           
+           DevOps and Agile are related, both seek continuous integration.
+           
+           Infrastructure as Code
+               Scripts the creation of resources
+                   - separates server configs from specific physical and virtual servers
+                   
+               Advantages
+               - increases scalability of environments
+               - reduces user error
+               - facilitates testing of new code
+               
+           DevOps facilitates security automation
+               DevSecOps applies DevOps techniques to a cybersec program
+           
+           DevOps Tools
+               - Continuous Validation: software testing as soon as its uploaded
+               - Continuous Integration: maintains linkages between code elements
+               - Continuous delivery: automatically moves code to proper environments
+               - Continuous deployment: automatically releases code for production use
+               - Continuous Monitoring: ensure code is working properly and trigger automatic remediation if issues arise.
+               
+2. Software Quality Assurance
+    
+    Code Review - peer analysis to assess code.
+    
+        Most common sources of security vulnerabilities.
+        Manual code reviews are one of the most basic testing techniques
+        totally informal or completely formal or something in between.
+        
+        Fagan Inspections
+        1. Planning: prep materials, identify participants, schedule the review
+        2. Overview: assigns roles, provides overview
+        3. Preparation: review code, supporting materials, look for potential issues
+        4. Meeting: formal meeting takes place, raise issues and discuss. formal identify defects
+        5. Rework: correct defects and move to...
+        6. Follow-up: code no longer requires inspection. all defects are corrected.
+        
+        Most orgs use less formal review process.
+        
+    Software Testing 
+         
+        Verification and Validation
+        
+        1. Software model validation
+        - are we building the right software?
+        2. Software verification
+        - are we building the software right?
+        
+        Stress Testing or Load testing
+             - Uses automated scripts to verify system capacity
+             - may be run internally or through a vendor
+             - verifies the system can handle the maximum expected load
+             - determines the maximum capacity of the system
+             
+        User Acceptance Testing (UAT)
+            - Ensures software will work for users.
+            - focus on usability and that it's intuitive for end users
+            
+        Regression Testing
+            - checks for unexpected side effects.
+            - software behaves the same way
+        
+    Code Security Tests
+        checks software for application security flaws
+        use technology to inspect software
+        
+        2 main types
+        
+        1. Static
+            Specialized testing software to analyze code for errors and security flaws without actually executing it.
+            
+        2. Dynamic
+            Execute code to verify that it is functioning correctly and doesn't have security flaws.
+            
+        Synthetic transactions supply inputs to code with known, expected outputs.
+        
+    Fuzz Testing
+        
+        software testing that feeds software many different input values in an attempt to cause an unpredictable state
+        or unauthorized access.
+        can use different input sources
+            Input sources
+                - Developer supplied input
+                - Developer supplied script
+                - Generation fuzzing
+                - Mutation fuzzing ( analyze real input )
+                - ZAP - OPWASP "spidering the website"
+         Avoid looking like a hacker, only fuzz test with permission.
+         Potentially dangerous, may be seen as hacking
+                
+    Code Repositories
+         Provide secure storage and version control.
+             - store software source code files
+             - coordinate changes among multiple developers
+             - perform version control (allow tracking of code, rollbacks)
+             - promote code reuse
+             
+         Code repos help to avoid dead code.
+         Git = most popular
+         video explains basic git functions etc. commit, add, push, etc
+         
+         Public code repositories create potential disclosure issues.
+         Integrity Measurement verifies release code is unchanged.
+         
+         
+    Application Management
+       Restricts software that may run
+       
+       Whitelisting: Administrators create a list of all the applications that may run on a system.
+       Blacklisting: Administrators create a list of the applications that are prohibited on a system.
+       Applications also require patching.
+       Host Software Baselining - identifies expected system software
+       App-Locker built in for microsoft
+       
+       
+   Third Party Code
+       Libraries contain shared software code
+       SDKS (Software Development Kits)
+           Provide programming resources combined with documentation, examples, and other resources.
+       Application Programming Interfaces (APIs)
+           Allow interaction with remote services.
+       Outsourcing code development also introduces third-party code concerns.
+       
+3. Application Attacks
+
+    Open Web Application Security Projecy OWASP
+        maintains a list of common web security issues.
+        Top 10
+        1. Broken access controls - allows unauthorized access
+        2. Cyptographic failures - allows access to sensitive data
+        3. injection vulnerabilities - inserts unwanted code
+        4. insecure design - fails to meet security requirements
+        5. security misconfiguration - occurs in many possible locations
+        6. vulnerable and outdated components - can jeopardize application security
+        7. identification and authentication failures - exploits session management
+        8. software and data integrity failures - allows insertion of insecure code
+        9. security logging and monitoring failures - can deprive analysts of needed data
+        10. server-side request forgery - tricks servers into requrestion URLs.
+        
+    Application Security
+         The world runs on software that must be secure and reliable. 
+         wired.com --> researcher commandeered a plane
+         Microsoft teams patched against image based takeover
+         1. Purchased Software - acquired from software vendors for use in many different organizations.
+         2. Developed Software - custom written to meet the specialized needs of a single organization.
+         
+         Application Hardening
+          - Use proper authentication
+          - encrypt sensistive data
+          - validate user input
+          - avoid and remediate known exploits
+          - deploy obfuscation and camouflage
+          
+          Prompt Patching is Critical 
+              - Attackers quickly exploit new vulnerabilities
+         
+         Application Configuration
+             - Type and scope of encryption
+             - Users with access to the application
+             - Access granted to authorized users
+             - Security of underlying infrastructure
+             
+         Configuration baselines allow quick identification and remediation of security gaps.
+         
+    Prevent SQL Injection
+        
+        Dynamic web applications depend upon back-end databases.
+        
+        Database-Driven Authentication
+        
+        user --> username: mchapple --> device (PC) --> whats the password for mchapple? --> DB
+                    password:apple                             it's: apple
+                    
+        Applications request data from databases using Structured Query Language (SQL).
+        
+        Writing a SQL Query
+            select ...
+            from ...
+            where ... (quick example)
+            
+        Hacker gets idea...
+        
+        My Dangerous Input
+        
+            mchapple'; UPDATE
+            user_accounts SET
+            password='hacked' WHERE
+            username='mchapple';--
+            
+        Putting It All Together
+            SELECT username, password
+            FROM user_accounts WHERE
+            username = 'mchapple';
+            
+            UPDATE user_accounts SET
+            password = 'hacked' WHERE
+            username='mchapple';
+            --'
+        
+        Semicolons separate SQL statements
+        two dashes indicate comments
+        
+        Single quotes are critical to SQL injection.
+        
+        2 techniques to defend: Input Validation and Parameterised queries.
+        
+        1. Input Validation: Protects against unsafe user input by checking it on the server before executing commands.
+        2. Parameterized SQL: Precompiles SQL code on the database server to prevent user input from altering query structure.
+        
+    Cross-Site Scripting (XSS)
+        Cross-site scripting attacks occur when an attacker embeds malicious scripts in a third-party website that are later 
+        run by innocent visitors to that site.
+        
+        HTML enhances websites with formatting and images.
+        
+        HTML Tags
+            - Mark up text with formatting instructions
+                <b> for bold text
+                <i> for italics
+                <a> for links
+            
+        XSS attackers embed scripts in sites without permission
+        <script>
+        "insert bad/evil code here"
+        </script>
+        
+        Don't allow <script> tags in user-supplied input.
+            
+   Request Forgery
+       Cross-site request forgery attacks pose a risk to web applications.
+       
+       Exam Tips: Cross-site request forgery, CSRF, XSRF, and "sea surf" all refer to the same attack.
+       
+       Cross-Site Request Forgery
+           Cross-site request forgery (CSRF or XSRF) attacks leverage the fact that users are often logged into
+           multiple sites at the same time and use one site to trick the browser into sending malicious requests to 
+           another site without the user's knowledge.
+      
+      XSRF Secretly sends requests
+          Often using image tags
+          <IMG SRC='http://www.mybank.com/transfer_funds.php?amount=500&source=checking&tarket=checking9159284'
+          (ALSO WHAT IDIOT BANK SENDS A URL LIKE THIS???)
+      Defending Against CSRF
+          - Rearchitect web applications
+          - prevent the use of http get requests
+          - advise users to log out of sites
+          - automatically log out users after an idle period.
+          
+      CSRF is a client-side attack
+      
+      Server-Side Request Forgery (SSRF)
+      
+          Request forgery attack that targets servers, rather than users, by manipulating servers into retrieving
+          malicious data from what it believes to be a trusted source.
+          
+   Defend Against Directory Traversal
+       
+       Directory traversal attacks allows an attacker to manipulate the web server's file structure.
+       
+       Quick Facts about Unix Filesystems
+           - . references the current directory
+           - .. references the directory one level higher in the hierarchy
+      
+       Directory Traversal Attacks
+           When an attacker uses directory navigation references to search for unsecured files on a server.
+           (Watch example in video)
+       OWASP Tool ZAP
+   
+   Overflow Attacks
+       Developers set aside areas of memory called buffers to store user-supplied content.
+       
+       Buffer Overflow Attacks
+           Use input larger than the buffer.
+           (Example user a no limit number on a hotel site for room number.) 
+           Check the request after sending with the long number.
+           Successful buffer overflow.
+           
+   Cookies and Attachments
+       Cookies track user activity on the web.
+       
+       What are Cookies?
+           - Cookies are data stored by websites in user browsers.
+           - They are particularly useful to recognize users. 
+           - They are used to remember information.
+       
+       Privacy Risks
+           - Cookies can be used across different websites
+           - Cookies can track user activity
+           - If you log into one site, everything is de-anonymized
+           
+       Example shown = chrome > privacy & security > edit cookie settings.
+           Block 3rd party cookies, you should anyways.
+           
+       Cookies are used in apps, too.
+       Be prepared to explain the purpose and risks of cookies to end users.
+       
+   Session Hijacking     
+       
+       Cookies provide an easy shortcut for web authentication.
+       Guessable Cookies = Jeopardize security
+       Example using zap again to look at cookies
+       
+           Discovered Cookies
+               Aspect - 65432udfqtb (6 letters)
+               webgoat - 65432ubphcfx (7 letters)
+               alice = ???
+               notice the same 5 digit #
+               Alice's cookie might also begin with the same numbers + text value
+               However each one is the same size as the user name . Look above ^
+               
+               therefore alice's cookie might have 5 letters after #
+               looking closer the letters have a pattern.
+               each is reverse + add 1
+               alice --> bmjdf --> reverse --> fdjmb = 65432fdjmb alice's cookie
+               
+               Header manipulation, edit the value with the authcookie
+               ;AuthCookie=65432jdjmb
+               
+               This is an issue
+               
+          1. Cookie Guessing
+               Possible if cookie values are not randomly generated
+          2. Session Replay
+               Possible if cookie values are not encrpyted in transit
+               
+          Secure Cookies
+              Sent using encryption.
+              
+   Code Execution Attacks         
+       
+       Occur when an attacker exploits a vulnerability in a system that allows the attacker to run commands on that system.
+       
+       Key Terms
+            Arbitrary Code Execution
+                - Code execution attacks where the attacker run commands of his or her choice.
+                
+            Remote Code Execution
+                - Code execution attacks that take place over a network connection.
+       
+       Code Execution Objectives
+           1. Install malicious code
+           2. Join a system to a botnet
+           3. Steal sensitive information
+           4. Create accounts for later access.
+           
+       2 Steps to protect your system against code execution attacks
+       
+           1. Limit administrative access.
+           2. Patch Systems and applications.
+           
+   Privilege Escalation Attack             
+       
+       Gain administrative access
+       Privilege escalation attacks often exploit buffer overflow vulnerabilties.
+       
+       Mitgating Priviliege Escalation
+           - perform input validation
+           - patch operating systems, platforms, and applications
+           - enforce the least privilege principle
+           - use DEP and ASLR technologies
+           
+   Driver Manipulation
+       Device drivers serve as the software interfaces between hardware devices and the operating system.
+       Device drivers require low-level access to the operating system.
+       
+       Refactoring
+           - Modifiying a driver to carry out malicious activities
+           - Requires access to the driver source code
+       
+       Shimming 
+           - Wraps a legitimate driver with a malicious shim
+           - Does not require access to the legitimate driver's source code
+   
+       Code signing protects against malicious drivers.
+       Ensure that device drivers are authentic and safe.
+   
+   Memory Vulnerabilties 
+      Memory Management provides secure isolated memory for each system process.
+      Memory Overflow
+          Allows arbitrary code execution
+          Resource exhaustion may slow down or disable a system
+      Memory Leak
+          Fails to release memory for reuse
+      Memory Pointers 
+          Following a pointer is known as pointer dereferencing
+              0x562C56D7A --> image
+      Null Pointer Dereferencing 
+          Null <photo> ---> ?
+       may allow a pass through security controls.
+       
+      DLL Injection
+          Tricks an application into loading malicious code. 
+          Memory management requires cooperation between software developers, system engineers, and security professionals.
+      
+    Race Condition Vulnerabilities
+        - Occurs when the proper functioning of a security control depends upon the timing of actions performed by the user or computer
+        - Uncontrolled race conditions can be significant security vulnerabilities
+        
+        Time of Check/Time of Use
+            Time elapsing between authorization and the action
+            
+        ATM Machine (redundant Automated Teller Machine-Machine)
+            1. The user inserts their ATM card.
+            2. The user enters their PIN 
+            3. The machine verifies the PIN and available balance.
+            4. The user requests funds
+            5. If the request is less than the balance the machine dispenses cash and debits the account.
+            
+        What if two users access the same account at the same time?
+        
+           Locks prevent simultaneous transactions from causing race conditions.
+      
+4. Secure Code Practices
+    
+    Input Validation
+       User - supplied input creates security exposures.
+       
+       Input Validation - Filters user-supplied input
+           Whitelisting - specifies allowable input
+               not always practical
+           Blacklisting - specifies disallowed input
+               more difficult and less effective than whitelisting
+      
+      Exam tips: Input validation should always be performed on the server. 
+          User can disable if done on the browser side.
+    
+    Parameterized Queries
+        In a parameterized query, the SQL template is precomplied on the database server.
+        
+        Stored Procedures
+            Use parameterized queries.
+            Azure Data Studio - SQL db to test
+            
+            CREATE PROCEDURE - creates stored procedure
+            
+            CREATE PROCEDURE spCustomerState(@State AS VARCHAR(max))
+            AS
+            SELECT * 
+            FROM Customers
+            WHERE CustState = @State
+            
+            then 
+            
+            EXEC spCustomerState 'TX'
+            
+            will execute the above for TX where CUSTSTATE = 'TX'
+    
+    Authentication and Session Management Issues
+        Application authentication verifies user identities and confirms authorization.
+        Never store passwords in plaintext form!
+        
+        1. Hashing - Uses a cryptographic function to transform the password into a unique value that can't be reversed
+        
+        2. Salting - Adds a random value to password prior to hashing to protect against rainbow table attacks.
+        
+        Encrypt passwords in transit.
+        
+        Transport Layer Security
+            Encrypts web traffic
+            protects cookies to avoid session replay attacks and the contents of HTTP headers.
+            
+   Output Encoding
+       Replaces dangerous characters
+       
+       1. HTML Encoding
+           Uses "&" notation to replace dangerous values that appear in an HTML-based web document
+           
+       2. URL Encoding
+           Uses "%" notation to replace dangerous values that appear in a URL
+       
+       *Common encoding chart*
+       
+       Use trusted libraries to perform output encoding.
+       
+   Error and Exception Handling
+       Inappropriate handling of errors is a crucial security issue
+       
+       State Diagram
+           1. Awaiting Input --> 2. Calculating Tax --> 3. Displaying Output
+       
+       Unpredictable states jeopardize application security.
+       Error Handling - Avoids Unpredictable states
+       
+       1. Awaiting Input --> 2. Validate Input --> 3. Calculating Tax --> 4. Displaying Output
+                                           (Display Error between 2-3)
+                                           
+       Java's try catch model. 
+           int numerator = 10;
+           int denominator - 0;
+           
+           try {
+                   int quotient = numerator/denominator;
+               }
+           catch (ArithmeticException err)
+               {
+                   System.out.println("Division By Zero!");
+               }
+               
+    Code Signing
+        Provides users with confidence that software comes from a trusted source.
+        Data signatures provide nonrepudiation.
+        
+        Code Signing
+            Applies digital signatures to software.
+            
+        Signing Code
+        1. The developer obtains a digital certificate
+        2. The developer creates a digital signature for the code using the private key associated with the certificate.
+        
+        Verifying Code Signatures
+        1. The user downloads the software
+        2. The operating system uses the certificate's public key to validate the signature.
+        3. The OS verifies that the signature's has matches the code.
+        4. The OS verifies that the developer is trusted.
+        
+        
+    DataBase Security
+        Databases contain sensitive business information.
+        Database Normal Forms - Design rules for columns and tables.
+            
+            Why Normalize?
+            - Prevent Data inconsistency
+            - Prevent update anomalies
+            - Reduce the need for restructuring existing databases
+            - Make the database schema more informative.
+            
+       Exam tips
+           You don't need to know the details of the normal forms on the exam.
+            
+       First Normal Form (1NF)
+       
+       1. Create separate tables for different sets of related data
+       2. Provide a primary key for every table.
+       3. Records may not have multivalued fields.
+       4. Records in a table must have the same number of fields
+       
+       Second Normal Form (2NF)
+       1. The table must be in 1NF
+       2. Every non-key field must be a fact about the entire key.
+       
+       Third Normal Form (#NF)
+       1. The table must be in 2NF
+       2. No non-key field may be a fact about another non-key field.
+       
+       Use encryption to protect sensitive data stored in a database
+       Obfuscation and camourflage hide the locations of sensitive information.
+       
+       Database Activity Monitoring
+           Logs and analyzes database requests
+       Stores Procedures
+           Protect against SQL injection.
+           
+   Data Deidentification
+       Organizations minimize risk by removing identifying information from datasets.
+       
+           Deidentification
+               Removes obvious identifiers
+               
+               Identifying Individuals
+               Zip Code + Birthday + Gender
+               Carnegie Mellon found that knowing all 3 = 87% uniquely identify of the US
+               Very unlikely for someone to have the same birthday in the same town with the same gender = same name
+               
+               Anonymization - remove the possibility of identification
+               
+           HIPAA Deidentification Standard
+           Expert Determination --> Apply statistical and scientific principles + very small risk anticipated recipient
+           could identify individual.
+           
+           Safe Harbor --> Removal of 18 types of identifiers. No actual knowledge residual information can identify individual.
+       
+       
+   Data Obfuscation
+       - Transforms personally identifying information into a form where it is no longer possible to tie it to an individual person.
+       
+       Hashing - replaces sensitive fields with hash values.
+       Rainbow Table Attack - Compares has values with percomputed hashes.
+       Salting - uses random values to defeat rainbow tables.
+       Tokenization - Replaces sensitive fields with a random identifier.
+       Masking - Redacts sensitive information from a file.
+            
+           
+       
+       
+        
+             
+              
+          
+         
+         
+         
+         
+             
+             
+             
+       
+               
+               
+               
+               
+               
+               
+               
+               
+               
+              
+           
